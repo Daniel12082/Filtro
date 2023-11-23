@@ -1,0 +1,129 @@
+-- filtro.gamaproducto definition
+
+CREATE TABLE `gamaproducto` (
+  `gama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `descripcion_texto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `descripcion_html` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `imagen` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`gama`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.oficina definition
+
+CREATE TABLE `oficina` (
+  `codigo_oficina` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ciudad` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pais` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `region` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `codigo_postal` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `telefono` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `linea_direccion1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `linea_direccion2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`codigo_oficina`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.producto definition
+
+CREATE TABLE `producto` (
+  `codigo_producto` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nombre` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `dimensiones` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `proveedor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `cantidad_en_stock` smallint NOT NULL,
+  `precio_venta` decimal(15,2) NOT NULL,
+  `precio_proveedor` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`codigo_producto`),
+  KEY `gama` (`gama`),
+  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`gama`) REFERENCES `gamaproducto` (`gama`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.empleado definition
+
+CREATE TABLE `empleado` (
+  `codigo_empleado` int NOT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `apellido1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `apellido2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `extension` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `codigo_oficina` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `codigo_jefe` int DEFAULT NULL,
+  `puesto` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`codigo_empleado`),
+  KEY `codigo_jefe` (`codigo_jefe`),
+  KEY `codigo_oficina` (`codigo_oficina`),
+  CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`codigo_oficina`) REFERENCES `oficina` (`codigo_oficina`),
+  CONSTRAINT `empleado_ibfk_2` FOREIGN KEY (`codigo_jefe`) REFERENCES `empleado` (`codigo_empleado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.cliente definition
+
+CREATE TABLE `cliente` (
+  `codigo_cliente` int NOT NULL,
+  `nombre_cliente` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nombre_contacto` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `apellido_contacto` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `telefono` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fax` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `linea_direccion1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `linea_direccion2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ciudad` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `region` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `pais` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `codigo_postal` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `codigo_empleado_rep_ventas` int DEFAULT NULL,
+  `limite_credito` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`codigo_cliente`),
+  KEY `codigo_empleado_rep_ventas` (`codigo_empleado_rep_ventas`),
+  CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`codigo_empleado_rep_ventas`) REFERENCES `empleado` (`codigo_empleado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.pedido definition
+
+CREATE TABLE `pedido` (
+  `codigo_pedido` int NOT NULL,
+  `fecha_pedido` date NOT NULL,
+  `fecha_esperada` date NOT NULL,
+  `fecha_entrega` date DEFAULT NULL,
+  `estado` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `comentarios` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `codigo_cliente` int NOT NULL,
+  PRIMARY KEY (`codigo_pedido`),
+  KEY `codigo_cliente` (`codigo_cliente`),
+  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`codigo_cliente`) REFERENCES `cliente` (`codigo_cliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.pago definition
+
+CREATE TABLE `pago` (
+  `codigo_cliente` int NOT NULL,
+  `id_transaccion` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `forma_pago` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fecha_pago` date NOT NULL,
+  `total` decimal(15,2) NOT NULL,
+  PRIMARY KEY (`codigo_cliente`,`id_transaccion`),
+  CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`codigo_cliente`) REFERENCES `cliente` (`codigo_cliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- filtro.detallepedido definition
+
+CREATE TABLE `detallepedido` (
+  `codigo_pedido` int NOT NULL,
+  `codigo_producto` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `cantidad` int NOT NULL,
+  `precio_unidad` decimal(15,2) NOT NULL,
+  `numero_linea` smallint NOT NULL,
+  PRIMARY KEY (`codigo_pedido`,`codigo_producto`),
+  KEY `codigo_producto` (`codigo_producto`),
+  CONSTRAINT `detalle_pedido_ibfk_1` FOREIGN KEY (`codigo_pedido`) REFERENCES `pedido` (`codigo_pedido`),
+  CONSTRAINT `detalle_pedido_ibfk_2` FOREIGN KEY (`codigo_producto`) REFERENCES `producto` (`codigo_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
