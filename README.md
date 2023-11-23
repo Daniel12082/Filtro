@@ -1,98 +1,60 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Filtro" />
+Consulta Requerida
 
-  &#xa0;
+9. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo.
 
-  <!-- <a href="https://filtro.netlify.app">Demo</a> -->
-</div>
+http://localhost:5246/Cliente/Consulta1
 
-<h1 align="center">Filtro</h1>
+1.4.5
 
-<p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8">
+5. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8">
+http://localhost:5246/Cliente/Consulta2
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8">
+1.4.6
 
-  <img alt="License" src="https://img.shields.io/github/license/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8">
+10. Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
 
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8" /> -->
+http://localhost:5246/Oficina/Consulta3
 
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8" /> -->
+1.4.7
 
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{YOUR_GITHUB_USERNAME}}/filtro?color=56BEB8" /> -->
-</p>
+14. Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.
 
-<!-- Status -->
+http://localhost:5246/Producto/Consulta4
 
-<!-- <h4 align="center"> 
-	🚧  Filtro 🚀 Under construction...  🚧
-</h4> 
+1.4.7
 
-<hr> -->
+15. . La facturación que ha tenido la empresa en toda la historia, indicando la base imponible, el IVA y el total facturado. La base imponible se calcula sumando el coste del producto por el número de unidades vendidas de la tabla detalle_pedido. El IVA es el 21 % de la base imponible, y el total la suma de los dos campos anteriores.
 
-<p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
-</p>
+http://localhost:5246/Producto/Consulta5
 
-<br>
+1.4.8.1
 
-## :dart: About ##
+3. Devuelve el nombre del producto del que se han vendido más unidades. 
 
-Describe your project
+http://localhost:5246/Producto/Consulta6
 
-## :sparkles: Features ##
+1.4.9
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+1. Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.
 
-## :rocket: Technologies ##
+http://localhost:5246/Cliente/Consulta7
 
-The following tools were used in this project:
+1.4.9
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+5. Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y primer apellido de su representante de ventas y la ciudad donde está su oficina.
 
-## :white_check_mark: Requirements ##
-
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
-
-## :checkered_flag: Starting ##
-
-```bash
-# Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/filtro
-
-# Access
-$ cd filtro
-
-# Install dependencies
-$ yarn
-
-# Run the project
-$ yarn start
-
-# The server will initialize in the <http://localhost:3000>
-```
-
-## :memo: License ##
-
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+http://localhost:5246/Cliente/Consulta8
 
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+1.4.6
 
-&#xa0;
+12.  Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado
 
-<a href="#top">Back to top</a>
+http://localhost:5246/Empleado/Consulta9
+
+1.4.6
+
+9. Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto
+
+http://localhost:5246/Producto/Consulta10

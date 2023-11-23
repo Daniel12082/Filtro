@@ -50,11 +50,31 @@ namespace Application.Repository
 
             return productosSinPedidos;
         }
+        public async Task<List<object>> Consulta5()
+        {
+        var ventasProductos = await _context.DetallePedidos
+        .GroupBy(dp => dp.CodigoProducto)
+        .Select(g => new
+        {
+        CodigoProducto = g.Key,
+        TotalVentas = g.Sum(item => item.Cantidad * item.PrecioUnidad),
+        TotalConIVA = g.Sum(item => item.Cantidad * item.PrecioUnidad * 1.21m) // Suponiendo 21% de IVA
+        })
+        .Where(resultado => resultado.TotalVentas > 3000)
+        .Join(_context.Productos,
+            resultado => resultado.CodigoProducto,
+            producto => producto.Id,
+            (resultado, producto) => new
+            {
+                producto.Nombre,
+                UnidadesVendidas = resultado.TotalVentas / producto.PrecioVenta, // Suponiendo que PrecioVenta representa el precio unitario
+                resultado.TotalVentas,
+                resultado.TotalConIVA
+            })
+        .ToListAsync();
 
-
-
-
-
+        return ventasProductos.Cast<object>().ToList();
+        }
     } 
 } 
 

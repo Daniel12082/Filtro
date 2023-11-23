@@ -113,5 +113,12 @@ public class ProductoController: BaseController
             var result = await _unitOfWork.Productos.Consulta10();
             return Ok(result);
         }
-        
+        [HttpGet("Consulta5")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Producto>>> Consulta5()
+        {
+            var result = await _unitOfWork.Productos.Consulta5();
+            return Ok(result);
+        }
     }
