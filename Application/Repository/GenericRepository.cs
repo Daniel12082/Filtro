@@ -7,7 +7,7 @@ using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
-namespace Api.Repository
+namespace API.Repository
 {
     public class GenericRepository<T> : IGeneric<T> where T : BaseEntity
     {

@@ -1,8 +1,8 @@
 using System; 
 using System.Collections.Generic; 
 using System.Linq; 
-using System.Threading.Tasks; 
-using Api.Repository; 
+using System.Threading.Tasks;
+using API.Repository;
 using Domain.Entities; 
 using Domain.Interfaces; 
 using Microsoft.EntityFrameworkCore; 

@@ -43,6 +43,8 @@ public class ClienteController: BaseController
             return _mapper.Map<ClienteDto>(entidad);
         }
 
+//   var result11 = await _unitOfWork.Employee.GetAllEmplyee();
+//                 return Ok(result11);
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -88,5 +90,37 @@ public class ClienteController: BaseController
             _unitOfWork.Clientes.Delete(entidad);
             await _unitOfWork.SaveAsync();
             return NoContent();
+        }
+        [HttpGet("Consulta1")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Cliente>>> Consulta1()
+        {
+            var result = await _unitOfWork.Clientes.Consulta1();
+            return Ok(result);
+        }
+        [HttpGet("Consulta2")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Cliente>>> Consulta2()
+        {
+            var result = await _unitOfWork.Clientes.Consulta2();
+            return Ok(result);
+        }
+        [HttpGet("Consulta7")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<Cliente>>> Consulta7()
+        {
+            var result = await _unitOfWork.Clientes.Consulta7();
+            return Ok(result);
+        }
+        [HttpGet("Consulta8")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<Cliente>>> Consulta8()
+        {
+            var result = await _unitOfWork.Clientes.Consulta8();
+            return Ok(result);
         }
     }

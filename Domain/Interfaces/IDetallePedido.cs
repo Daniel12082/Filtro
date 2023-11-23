@@ -7,8 +7,8 @@ using Domain.Entities;
 
 namespace Domain.Interfaces
 { 
-    public interface IGama_Producto:IGeneric<Gama_Producto> 
+    public interface IDetallePedido:IGeneric<DetallePedido> 
     {
-
+        // Task<IEnumerable<object>>FacturacionTotal();
     }
 } 

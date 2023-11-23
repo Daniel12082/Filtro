@@ -33,7 +33,7 @@ public class ProductoController: BaseController
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductoDto>> Get(int id)
+        public async Task<ActionResult<ProductoDto>> Get(string id)
         {
             var entidad = await _unitOfWork.Productos.GetByIdAsync(id);
             if(entidad == null)
@@ -78,7 +78,7 @@ public class ProductoController: BaseController
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             var entidad = await _unitOfWork.Productos.GetByIdAsync(id);
             if(entidad == null)
@@ -89,4 +89,29 @@ public class ProductoController: BaseController
             await _unitOfWork.SaveAsync();
             return NoContent();
         }
+        [HttpGet("Consulta4")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Producto>>> Consulta4()
+        {
+            var result = await _unitOfWork.Productos.Consulta4();
+            return Ok(result);
+        }
+        [HttpGet("Consulta6")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> Consulta6()
+        {
+            var result = await _unitOfWork.Productos.Consulta6();
+            return Ok(result);
+        }
+        [HttpGet("Consulta10")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Producto>>> Consulta10()
+        {
+            var result = await _unitOfWork.Productos.Consulta10();
+            return Ok(result);
+        }
+        
     }

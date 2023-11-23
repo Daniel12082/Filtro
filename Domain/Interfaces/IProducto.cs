@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Domain.Entities;
 
 namespace Domain.Interfaces
-{ 
-    public interface IProducto:IGeneric<Producto> 
+{
+    public interface IProducto : IGenericString<Producto>
     {
-
+        Task<IEnumerable<object>>Consulta4();
+        Task<string>Consulta6();
+        Task<IEnumerable<object>>Consulta10();
     }
 } 

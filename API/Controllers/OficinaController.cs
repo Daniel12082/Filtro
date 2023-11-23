@@ -33,7 +33,7 @@ public class OficinaController: BaseController
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<OficinaDto>> Get(int id)
+        public async Task<ActionResult<OficinaDto>> Get(string id)
         {
             var entidad = await _unitOfWork.Oficinas.GetByIdAsync(id);
             if(entidad == null)
@@ -63,7 +63,7 @@ public class OficinaController: BaseController
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<OficinaDto>> Put(int id, [FromBody] OficinaDto OficinaDto)
+        public async Task<ActionResult<OficinaDto>> Put(string id, [FromBody] OficinaDto OficinaDto)
         {
             if(OficinaDto == null)
             {
@@ -78,7 +78,7 @@ public class OficinaController: BaseController
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             var entidad = await _unitOfWork.Oficinas.GetByIdAsync(id);
             if(entidad == null)
@@ -88,5 +88,14 @@ public class OficinaController: BaseController
             _unitOfWork.Oficinas.Delete(entidad);
             await _unitOfWork.SaveAsync();
             return NoContent();
+        }
+        [HttpGet("Consulta3")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<OficinaDto>> Consulta3()
+        {
+            var result = await _unitOfWork.Oficinas.Consulta3();
+            return Ok(result);
         }
     }

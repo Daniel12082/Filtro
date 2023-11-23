@@ -89,4 +89,12 @@ public class EmpleadoController: BaseController
             await _unitOfWork.SaveAsync();
             return NoContent();
         }
+        [HttpGet("Consulta9")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Empleado>>> Consulta9()
+        {
+            var result = await _unitOfWork.Empleados.Consulta9();
+            return Ok(result);
+        }
     }
